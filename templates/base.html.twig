@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}SMUR Pontoise{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🏥</text></svg>">
+        {% block stylesheets %}
+            <style>
+                :root {
+                    --primary-color: #667eea;
+                    --primary-dark: #5a67d8;
+                    --secondary-color: #764ba2;
+                    --accent-color: #f5f7fa;
+                    --text-color: #2d3748;
+                    --border-color: #e2e8f0;
+                }
+                
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                }
+                
+                .btn-primary {
+                    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                    border: none;
+                }
+                
+                .navbar-brand {
+                    color: var(--primary-color) !important;
+                    font-weight: 600;
+                }
+                
+                .sidebar {
+                    background: linear-gradient(180deg, var(--accent-color) 0%, #ffffff 100%);
+                }
+                
+                .main-header {
+                    background: var(--primary-color);
+                }
+            </style>
+        {% endblock %}
+
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        
+        <footer style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem; text-align: center; margin-top: 2rem; font-size: 0.9rem;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <p style="margin: 0; opacity: 0.9;">
+                    Développé par <a href="mailto:manassehrandriamitsiry@gmail.com" style="color: white; text-decoration: none; font-weight: 500;">manassehrandriamitsiry@gmail.com</a>
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>

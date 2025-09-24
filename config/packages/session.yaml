@@ -1,0 +1,12 @@
+framework:
+    session:
+        # Session security settings
+        cookie_secure: auto
+        cookie_httponly: true
+        cookie_samesite: 'strict'
+        cookie_lifetime: 3600  # 1 hour
+        gc_maxlifetime: 3600
+        name: SMUR_SESSION
+        
+    # CSRF protection
+    csrf_protection: true

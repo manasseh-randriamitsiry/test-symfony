@@ -1,0 +1,135 @@
+<?php //e5a21f0b5bc81a8201b3c8d445d973e7
+
+return [PHP_INT_MAX, static fn () => \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectSqlFinalizer'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectSqlFinalizer')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            'sqlFinalizer' => [
+                $o[1],
+            ],
+            'resultSetMapping' => [
+                $o[2],
+            ],
+            'parameterMappings' => [
+                [
+                    'email' => [
+                        0,
+                        1,
+                    ],
+                ],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\SingleSelectSqlFinalizer' => [
+            'sql' => [
+                1 => 'SELECT u0_.id AS id_0, u0_.identifiant AS identifiant_1, u0_.roles AS roles_2, u0_.password AS password_3, u0_.nom AS nom_4, u0_.prenom AS prenom_5, u0_.email_pro AS email_pro_6, u0_.email_perso AS email_perso_7, u0_.telephone AS telephone_8, u0_.fonction AS fonction_9, u0_.metier AS metier_10, u0_.bureau AS bureau_11, u0_.derniere_connexion AS derniere_connexion_12, u0_.acces_gestion_utilisateurs AS acces_gestion_utilisateurs_13, u0_.acces_gestion_equipes AS acces_gestion_equipes_14, u0_.created_at AS created_at_15, u0_.updated_at AS updated_at_16 FROM `user` u0_ WHERE u0_.email_pro = ? OR u0_.email_perso = ?',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'u' => 'App\\Entity\\User',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'identifiant_1' => 'identifiant',
+                    'roles_2' => 'roles',
+                    'password_3' => 'password',
+                    'nom_4' => 'nom',
+                    'prenom_5' => 'prenom',
+                    'email_pro_6' => 'email_pro',
+                    'email_perso_7' => 'email_perso',
+                    'telephone_8' => 'telephone',
+                    'fonction_9' => 'fonction',
+                    'metier_10' => 'metier',
+                    'bureau_11' => 'bureau',
+                    'derniere_connexion_12' => 'derniere_connexion',
+                    'acces_gestion_utilisateurs_13' => 'acces_gestion_utilisateurs',
+                    'acces_gestion_equipes_14' => 'acces_gestion_equipes',
+                    'created_at_15' => 'created_at',
+                    'updated_at_16' => 'updated_at',
+                ],
+            ],
+            'columnAliasMappings' => [
+                2 => [
+                    'App\\Entity\\User' => [
+                        'u' => [
+                            'id' => 'id_0',
+                            'identifiant' => 'identifiant_1',
+                            'roles' => 'roles_2',
+                            'password' => 'password_3',
+                            'nom' => 'nom_4',
+                            'prenom' => 'prenom_5',
+                            'email_pro' => 'email_pro_6',
+                            'email_perso' => 'email_perso_7',
+                            'telephone' => 'telephone_8',
+                            'fonction' => 'fonction_9',
+                            'metier' => 'metier_10',
+                            'bureau' => 'bureau_11',
+                            'derniere_connexion' => 'derniere_connexion_12',
+                            'acces_gestion_utilisateurs' => 'acces_gestion_utilisateurs_13',
+                            'acces_gestion_equipes' => 'acces_gestion_equipes_14',
+                            'created_at' => 'created_at_15',
+                            'updated_at' => 'updated_at_16',
+                        ],
+                    ],
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'u' => null,
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'u',
+                    'identifiant_1' => 'u',
+                    'roles_2' => 'u',
+                    'password_3' => 'u',
+                    'nom_4' => 'u',
+                    'prenom_5' => 'u',
+                    'email_pro_6' => 'u',
+                    'email_perso_7' => 'u',
+                    'telephone_8' => 'u',
+                    'fonction_9' => 'u',
+                    'metier_10' => 'u',
+                    'bureau_11' => 'u',
+                    'derniere_connexion_12' => 'u',
+                    'acces_gestion_utilisateurs_13' => 'u',
+                    'acces_gestion_equipes_14' => 'u',
+                    'created_at_15' => 'u',
+                    'updated_at_16' => 'u',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\User',
+                    'identifiant_1' => 'App\\Entity\\User',
+                    'roles_2' => 'App\\Entity\\User',
+                    'password_3' => 'App\\Entity\\User',
+                    'nom_4' => 'App\\Entity\\User',
+                    'prenom_5' => 'App\\Entity\\User',
+                    'email_pro_6' => 'App\\Entity\\User',
+                    'email_perso_7' => 'App\\Entity\\User',
+                    'telephone_8' => 'App\\Entity\\User',
+                    'fonction_9' => 'App\\Entity\\User',
+                    'metier_10' => 'App\\Entity\\User',
+                    'bureau_11' => 'App\\Entity\\User',
+                    'derniere_connexion_12' => 'App\\Entity\\User',
+                    'acces_gestion_utilisateurs_13' => 'App\\Entity\\User',
+                    'acces_gestion_equipes_14' => 'App\\Entity\\User',
+                    'created_at_15' => 'App\\Entity\\User',
+                    'updated_at_16' => 'App\\Entity\\User',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+)];

@@ -1,0 +1,21 @@
+easy_admin:
+    site_name: 'SMUR Pontoise'
+    
+    design:
+        brand:
+            name: 'SMUR Pontoise'
+            color: '#667eea'
+        
+        color_scheme: 'auto'
+        
+        menu:
+            - { entity: 'User', label: 'Utilisateurs', icon: 'fa fa-users' }
+            - { label: 'Navigation', type: 'divider' }
+            - { route: 'app_dashboard', label: 'Retour au bureau', icon: 'fa fa-arrow-left' }
+            - { route: 'app_logout', label: 'Déconnexion', icon: 'fa fa-sign-out' }
+    
+    formats:
+        date: 'd/m/Y'
+        time: 'H:i'
+        datetime: 'd/m/Y H:i'
+        number: '%.2f'

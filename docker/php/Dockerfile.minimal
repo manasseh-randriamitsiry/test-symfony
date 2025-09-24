@@ -1,0 +1,52 @@
+FROM php:8.2-fpm
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    libzip-dev \
+    libicu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install -j$(nproc) \
+        pdo_mysql \
+        mbstring \
+        exif \
+        pcntl \
+        bcmath \
+        gd \
+        zip \
+        intl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy application
+COPY . .
+
+# Fix ownership and Git config
+RUN chown -R www-data:www-data /var/www/html \
+    && git config --global --add safe.directory /var/www/html || true
+
+# Install Composer dependencies
+RUN composer install --no-interaction
+
+# Create environment file
+RUN cp .env.docker .env.local \
+    && php -r "\$secret = bin2hex(random_bytes(32)); \$env = file_get_contents('.env.local'); \$env = str_replace('DOCKER_GENERATED_SECRET_WILL_BE_REPLACED', \$secret, \$env); file_put_contents('.env.local', \$env);"
+
+# Create directories and set permissions
+RUN mkdir -p var/cache var/log var/sessions \
+    && chown -R www-data:www-data var \
+    && chmod -R 775 var
+
+EXPOSE 9000
+CMD ["php-fpm"]

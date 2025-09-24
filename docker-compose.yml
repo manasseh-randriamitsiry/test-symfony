@@ -1,0 +1,77 @@
+services:
+  # PHP-FPM with Nginx
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile.minimal
+    container_name: smur_app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - smur_network
+    depends_on:
+      - database
+    environment:
+      - APP_ENV=prod
+      - DATABASE_URL=mysql://smur_user:smur_password@database:3306/smur_db?serverVersion=8.0.32&charset=utf8mb4
+
+  # Nginx Web Server
+  nginx:
+    image: nginx:alpine
+    container_name: smur_nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - smur_network
+
+  # MySQL Database
+  database:
+    image: mysql:8.0
+    container_name: smur_database
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: smur_db
+      MYSQL_USER: smur_user
+      MYSQL_PASSWORD: smur_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3307:3306"
+    networks:
+      - smur_network
+
+  # phpMyAdmin (optional, for database management)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: smur_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: database
+      PMA_USER: smur_user
+      PMA_PASSWORD: smur_password
+    ports:
+      - "8081:80"
+    depends_on:
+      - database
+    networks:
+      - smur_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  smur_network:
+    driver: bridge

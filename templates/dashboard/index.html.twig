@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMUR Pontoise - Bureau</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 300;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-name {
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .welcome {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .welcome h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .module-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .module-card.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .module-card.disabled:hover {
+            transform: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .module-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .module-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+
+        .module-description {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .access-denied {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .user-details {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .user-details h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .user-detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .user-detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .user-detail-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .user-detail-value {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>SMUR Pontoise</h1>
+            <div class="user-info">
+                <span class="user-name">{{ user.fullName }}</span>
+                <a href="{{ path('app_logout') }}" class="logout-btn">Déconnexion</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="welcome">
+            <h2>Bureau</h2>
+            <p>Bienvenue {{ user.prenom }}, voici les modules auxquels vous avez accès :</p>
+        </div>
+
+        <div class="modules-grid">
+            {% if user.accesGestionUtilisateurs %}
+                <a href="{{ path('admin') }}" class="module-card">
+                    <span class="module-icon">👥</span>
+                    <div class="module-title">Gestion des utilisateurs</div>
+                    <div class="module-description">
+                        Gérer les comptes utilisateurs, leurs informations et leurs droits d'accès.
+                    </div>
+                </a>
+            {% else %}
+                <div class="module-card disabled">
+                    <span class="module-icon">👥</span>
+                    <div class="module-title">Gestion des utilisateurs</div>
+                    <div class="module-description">
+                        Gérer les comptes utilisateurs, leurs informations et leurs droits d'accès.
+                    </div>
+                    <div class="access-denied">Accès non autorisé</div>
+                </div>
+            {% endif %}
+
+            {% if user.accesGestionEquipes %}
+                <a href="#" class="module-card" onclick="alert('Module en cours de développement')">
+                    <span class="module-icon">🏥</span>
+                    <div class="module-title">Gestion des équipes</div>
+                    <div class="module-description">
+                        Organiser et gérer les équipes SMUR, planifier les interventions.
+                    </div>
+                </a>
+            {% else %}
+                <div class="module-card disabled">
+                    <span class="module-icon">🏥</span>
+                    <div class="module-title">Gestion des équipes</div>
+                    <div class="module-description">
+                        Organiser et gérer les équipes SMUR, planifier les interventions.
+                    </div>
+                    <div class="access-denied">Accès non autorisé</div>
+                </div>
+            {% endif %}
+
+            <a href="#" class="module-card" onclick="alert('Module en cours de développement')">
+                <span class="module-icon">📦</span>
+                <div class="module-title">Commandes</div>
+                <div class="module-description">
+                    Gérer les commandes de matériel médical et d'équipements.
+                </div>
+            </a>
+        </div>
+
+        <div class="user-details">
+            <h3>Vos informations</h3>
+            <div class="user-detail-item">
+                <span class="user-detail-label">Fonction :</span>
+                <span class="user-detail-value">{{ user.fonction }}</span>
+            </div>
+            <div class="user-detail-item">
+                <span class="user-detail-label">Métier :</span>
+                <span class="user-detail-value">{{ user.metier }}</span>
+            </div>
+            <div class="user-detail-item">
+                <span class="user-detail-label">Bureau :</span>
+                <span class="user-detail-value">{{ user.bureau }}</span>
+            </div>
+            <div class="user-detail-item">
+                <span class="user-detail-label">Email professionnel :</span>
+                <span class="user-detail-value">{{ user.emailPro }}</span>
+            </div>
+            <div class="user-detail-item">
+                <span class="user-detail-label">Téléphone :</span>
+                <span class="user-detail-value">{{ user.telephone }}</span>
+            </div>
+            {% if user.derniereConnexion %}
+            <div class="user-detail-item">
+                <span class="user-detail-label">Dernière connexion :</span>
+                <span class="user-detail-value">{{ user.derniereConnexion|date('d/m/Y à H:i') }}</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <footer style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem; text-align: center; margin-top: 2rem; font-size: 0.9rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p style="margin: 0; opacity: 0.9;">
+                Développé par <a href="mailto:manassehrandriamitsiry@gmail.com" style="color: white; text-decoration: none; font-weight: 500;">manassehrandriamitsiry@gmail.com</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
