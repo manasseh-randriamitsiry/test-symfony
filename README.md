@@ -1,3 +1,6 @@
+# Danger
+I commited everything without adding anything into the gitignore file to make the project deployement easy and FOR LEARNING PURPOSE ONLY. For real project, make sure to not exposing your config
+
 # Clean everything
 ```bash 
 docker-compose down
@@ -18,16 +21,15 @@ timeout /t 15
 # Run setup
 ```bash
 docker\setup.bat
-
-
+```
 ### Container Management
 ```bash
 # Stop all services
 docker-compose down
-
+```
 # Rebuild containers
 docker-compose up --build
-
+```
 # View container status
 docker-compose ps
 
